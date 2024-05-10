@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 final options = BaseOptions(
   baseUrl: 'http://api.aladhan.com/v1',
-  connectTimeout: Duration(seconds: 5),
-  receiveTimeout: Duration(seconds: 3),
+  connectTimeout: Duration(seconds: 10),
+  receiveTimeout: Duration(seconds: 30),
 );
 
 class ApiService {

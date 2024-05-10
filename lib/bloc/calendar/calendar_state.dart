@@ -22,3 +22,7 @@ class CalendarSuccess extends CalendarState {
 class CalendarError extends CalendarState {
   const CalendarError(String error) : super._(null, error);
 }
+
+class CalendarLoading extends CalendarState {
+  const CalendarLoading() : super._(null, null);
+}

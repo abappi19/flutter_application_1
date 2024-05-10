@@ -24,6 +24,8 @@ class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
         //get calendar
 
         try {
+          emit(const CalendarLoading());
+
           List<Calendar> list = await cr.getCalendarResponse(
               year: event.year,
               month: event.month,

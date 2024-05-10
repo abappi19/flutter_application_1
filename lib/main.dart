@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/bloc/calendar/calendar_bloc.dart';
 import 'package:flutter_application_1/bloc/calendar/calendar_event.dart';
 import 'package:flutter_application_1/bloc/calendar/calendar_state.dart';
+import 'package:flutter_application_1/data/model/calendar.dart';
 import 'package:flutter_application_1/data/service/api_service.dart';
+import 'package:flutter_application_1/ui/component/calendar_view.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'injection.dart';
 
@@ -26,10 +28,10 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         debugShowMaterialGrid: false,
-        title: 'API call',
+        title: 'Pray Time API call',
         home: Scaffold(
           appBar: AppBar(
-            title: Text("API Call"),
+            title: Text("Pray Time API Call"),
           ),
           body: Center(
             child:
@@ -47,12 +49,43 @@ class MyApp extends StatelessWidget {
                 );
               }
 
+              if (state is CalendarLoading) {
+                return Text('Loading...');
+              }
+
               if (state is CalendarError) {
-                return Text('Error: ${state.error}');
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Error: ${state.error}'),
+                    TextButton(
+                      child: Text("Click to load calendar"),
+                      onPressed: () {
+                        bloc.add(CalenderEventGet(
+                            year: 2024,
+                            month: 4,
+                            latitude: 51.508515,
+                            longitude: -0.1254872));
+                      },
+                    )
+                  ],
+                );
               }
 
               if (state is CalendarSuccess) {
-                return Text("success");
+                return ListView.builder(
+                  scrollDirection: Axis.vertical,
+                    itemCount: state.calendarList?.length,
+                    itemBuilder: (BuildContext context, int position) {
+                      Calendar? c = state.calendarList?.elementAt(position);
+
+                      if (c == null) {
+                        return Text("Invalid calendar data");
+                      }
+
+                      return CalendarView(
+                          key: Key(position.toString()), calendar: c);
+                    });
               }
 
               return const Text("hi");
