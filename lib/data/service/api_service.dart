@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 final options = BaseOptions(
-  baseUrl: 'http://api.aladhan.com/v1',
+  baseUrl: 'https://api.aladhan.com/v1',
   connectTimeout: Duration(seconds: 10),
   receiveTimeout: Duration(seconds: 30),
 );
