@@ -1,0 +1,283 @@
+// To parse this JSON data, do
+//
+//     final calendarResponse = calendarResponseFromJson(jsonString);
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'dart:convert';
+
+part 'part.freezed.dart';
+part 'part.g.dart';
+
+CalendarResponse calendarResponseFromJson(String str) => CalendarResponse.fromJson(json.decode(str));
+
+String calendarResponseToJson(CalendarResponse data) => json.encode(data.toJson());
+
+@freezed
+class CalendarResponse with _$CalendarResponse {
+    const factory CalendarResponse({
+        @JsonKey(name: "code")
+        required int code,
+        @JsonKey(name: "status")
+        required String status,
+        @JsonKey(name: "calendars")
+        required List<Calendar> calendars,
+    }) = _CalendarResponse;
+
+    factory CalendarResponse.fromJson(Map<String, dynamic> json) => _$CalendarResponseFromJson(json);
+}
+
+@freezed
+class Calendar with _$Calendar {
+    const factory Calendar({
+        @JsonKey(name: "timings")
+        required Timings timings,
+        @JsonKey(name: "date")
+        required Date date,
+        @JsonKey(name: "meta")
+        required Meta meta,
+    }) = _Calendar;
+
+    factory Calendar.fromJson(Map<String, dynamic> json) => _$CalendarFromJson(json);
+}
+
+@freezed
+class Date with _$Date {
+    const factory Date({
+        @JsonKey(name: "readable")
+        required String readable,
+        @JsonKey(name: "timestamp")
+        required String timestamp,
+        @JsonKey(name: "gregorian")
+        required Gregorian gregorian,
+        @JsonKey(name: "hijri")
+        required Hijri hijri,
+    }) = _Date;
+
+    factory Date.fromJson(Map<String, dynamic> json) => _$DateFromJson(json);
+}
+
+@freezed
+class Gregorian with _$Gregorian {
+    const factory Gregorian({
+        @JsonKey(name: "date")
+        required String date,
+        @JsonKey(name: "format")
+        required String format,
+        @JsonKey(name: "day")
+        required String day,
+        @JsonKey(name: "weekday")
+        required GregorianWeekday weekday,
+        @JsonKey(name: "month")
+        required GregorianMonth month,
+        @JsonKey(name: "year")
+        required String year,
+        @JsonKey(name: "designation")
+        required Designation designation,
+    }) = _Gregorian;
+
+    factory Gregorian.fromJson(Map<String, dynamic> json) => _$GregorianFromJson(json);
+}
+
+@freezed
+class Designation with _$Designation {
+    const factory Designation({
+        @JsonKey(name: "abbreviated")
+        required String abbreviated,
+        @JsonKey(name: "expanded")
+        required String expanded,
+    }) = _Designation;
+
+    factory Designation.fromJson(Map<String, dynamic> json) => _$DesignationFromJson(json);
+}
+
+@freezed
+class GregorianMonth with _$GregorianMonth {
+    const factory GregorianMonth({
+        @JsonKey(name: "number")
+        required int number,
+        @JsonKey(name: "en")
+        required String en,
+    }) = _GregorianMonth;
+
+    factory GregorianMonth.fromJson(Map<String, dynamic> json) => _$GregorianMonthFromJson(json);
+}
+
+@freezed
+class GregorianWeekday with _$GregorianWeekday {
+    const factory GregorianWeekday({
+        @JsonKey(name: "en")
+        required String en,
+    }) = _GregorianWeekday;
+
+    factory GregorianWeekday.fromJson(Map<String, dynamic> json) => _$GregorianWeekdayFromJson(json);
+}
+
+@freezed
+class Hijri with _$Hijri {
+    const factory Hijri({
+        @JsonKey(name: "date")
+        required String date,
+        @JsonKey(name: "format")
+        required String format,
+        @JsonKey(name: "day")
+        required String day,
+        @JsonKey(name: "weekday")
+        required HijriWeekday weekday,
+        @JsonKey(name: "month")
+        required HijriMonth month,
+        @JsonKey(name: "year")
+        required String year,
+        @JsonKey(name: "designation")
+        required Designation designation,
+        @JsonKey(name: "holidays")
+        required List<dynamic> holidays,
+    }) = _Hijri;
+
+    factory Hijri.fromJson(Map<String, dynamic> json) => _$HijriFromJson(json);
+}
+
+@freezed
+class HijriMonth with _$HijriMonth {
+    const factory HijriMonth({
+        @JsonKey(name: "number")
+        required int number,
+        @JsonKey(name: "en")
+        required String en,
+        @JsonKey(name: "ar")
+        required String ar,
+    }) = _HijriMonth;
+
+    factory HijriMonth.fromJson(Map<String, dynamic> json) => _$HijriMonthFromJson(json);
+}
+
+@freezed
+class HijriWeekday with _$HijriWeekday {
+    const factory HijriWeekday({
+        @JsonKey(name: "en")
+        required String en,
+        @JsonKey(name: "ar")
+        required String ar,
+    }) = _HijriWeekday;
+
+    factory HijriWeekday.fromJson(Map<String, dynamic> json) => _$HijriWeekdayFromJson(json);
+}
+
+@freezed
+class Meta with _$Meta {
+    const factory Meta({
+        @JsonKey(name: "latitude")
+        required double latitude,
+        @JsonKey(name: "longitude")
+        required double longitude,
+        @JsonKey(name: "timezone")
+        required String timezone,
+        @JsonKey(name: "method")
+        required Method method,
+        @JsonKey(name: "latitudeAdjustmentMethod")
+        required String latitudeAdjustmentMethod,
+        @JsonKey(name: "midnightMode")
+        required String midnightMode,
+        @JsonKey(name: "school")
+        required String school,
+        @JsonKey(name: "offset")
+        required Offset offset,
+    }) = _Meta;
+
+    factory Meta.fromJson(Map<String, dynamic> json) => _$MetaFromJson(json);
+}
+
+@freezed
+class Method with _$Method {
+    const factory Method({
+        @JsonKey(name: "id")
+        required int id,
+        @JsonKey(name: "name")
+        required String name,
+        @JsonKey(name: "params")
+        required Params params,
+        @JsonKey(name: "location")
+        required Location location,
+    }) = _Method;
+
+    factory Method.fromJson(Map<String, dynamic> json) => _$MethodFromJson(json);
+}
+
+@freezed
+class Location with _$Location {
+    const factory Location({
+        @JsonKey(name: "latitude")
+        required double latitude,
+        @JsonKey(name: "longitude")
+        required double longitude,
+    }) = _Location;
+
+    factory Location.fromJson(Map<String, dynamic> json) => _$LocationFromJson(json);
+}
+
+@freezed
+class Params with _$Params {
+    const factory Params({
+        @JsonKey(name: "Fajr")
+        required int fajr,
+        @JsonKey(name: "Isha")
+        required int isha,
+    }) = _Params;
+
+    factory Params.fromJson(Map<String, dynamic> json) => _$ParamsFromJson(json);
+}
+
+@freezed
+class Offset with _$Offset {
+    const factory Offset({
+        @JsonKey(name: "Imsak")
+        required int imsak,
+        @JsonKey(name: "Fajr")
+        required int fajr,
+        @JsonKey(name: "Sunrise")
+        required int sunrise,
+        @JsonKey(name: "Dhuhr")
+        required int dhuhr,
+        @JsonKey(name: "Asr")
+        required int asr,
+        @JsonKey(name: "Maghrib")
+        required int maghrib,
+        @JsonKey(name: "Sunset")
+        required int sunset,
+        @JsonKey(name: "Isha")
+        required int isha,
+        @JsonKey(name: "Midnight")
+        required int midnight,
+    }) = _Offset;
+
+    factory Offset.fromJson(Map<String, dynamic> json) => _$OffsetFromJson(json);
+}
+
+@freezed
+class Timings with _$Timings {
+    const factory Timings({
+        @JsonKey(name: "Fajr")
+        required String fajr,
+        @JsonKey(name: "Sunrise")
+        required String sunrise,
+        @JsonKey(name: "Dhuhr")
+        required String dhuhr,
+        @JsonKey(name: "Asr")
+        required String asr,
+        @JsonKey(name: "Sunset")
+        required String sunset,
+        @JsonKey(name: "Maghrib")
+        required String maghrib,
+        @JsonKey(name: "Isha")
+        required String isha,
+        @JsonKey(name: "Imsak")
+        required String imsak,
+        @JsonKey(name: "Midnight")
+        required String midnight,
+        @JsonKey(name: "Firstthird")
+        required String firstthird,
+        @JsonKey(name: "Lastthird")
+        required String lastthird,
+    }) = _Timings;
+
+    factory Timings.fromJson(Map<String, dynamic> json) => _$TimingsFromJson(json);
+}
